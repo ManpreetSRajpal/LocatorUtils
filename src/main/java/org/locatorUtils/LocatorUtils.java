@@ -28,10 +28,10 @@ public class LocatorUtils {
     }
 
     public static By getLocator(Object obj, Field field) throws IllegalAccessException {
-        if (field.isAnnotationPresent(AndroidLocator.class)) {
+        if (ENV.equals("Android") && field.isAnnotationPresent(AndroidLocator.class)) {
             AndroidLocator androidLocator = field.getAnnotation(AndroidLocator.class);
             return locatorStrategy.getAndroidLocator(androidLocator);
-        } else if (field.isAnnotationPresent(IOSLocator.class)) {
+        } else if (ENV.equals("IOS") && field.isAnnotationPresent(IOSLocator.class)) {
             IOSLocator iosLocator = field.getAnnotation(IOSLocator.class);
             return locatorStrategy.getIOSLocator(iosLocator);
         } else {
