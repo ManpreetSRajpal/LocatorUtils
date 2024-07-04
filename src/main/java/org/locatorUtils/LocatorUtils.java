@@ -11,11 +11,13 @@ import java.lang.reflect.Field;
 
 public class LocatorUtils {
     private static final String ENV = System.getenv("ENVIRONMENT");
-
     private static LocatorStrategy locatorStrategy;
 
     static {
-        switch (ENV) {
+        if (ENV == null || ENV.isEmpty()) {
+            throw new RuntimeException("Environment variable ENVIRONMENT is not set.");
+        }
+        switch (ENV.toUpperCase()) {
             case "ANDROID":
                 locatorStrategy = new AndroidLocatorStrategy();
                 break;
