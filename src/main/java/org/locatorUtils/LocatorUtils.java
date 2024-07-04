@@ -10,13 +10,13 @@ import org.openqa.selenium.By;
 import java.lang.reflect.Field;
 
 public class LocatorUtils {
-    private static final String ENV = System.getenv("ENV") != null ? System.getenv("ENV") : "Android";
+    private static final String ENV = System.getenv("ENVIRONMENT") != null ? System.getenv("ENVIRONMENT") : "ANDROID";
 
     private static LocatorStrategy locatorStrategy;
 
     static {
         switch (ENV) {
-            case "Android":
+            case "ANDROID":
                 locatorStrategy = new AndroidLocatorStrategy();
                 break;
             case "IOS":
@@ -28,7 +28,7 @@ public class LocatorUtils {
     }
 
     public static By getLocator(Object obj, Field field) throws IllegalAccessException {
-        if (ENV.equals("Android") && field.isAnnotationPresent(AndroidLocator.class)) {
+        if (ENV.equals("ANDROID") && field.isAnnotationPresent(AndroidLocator.class)) {
             AndroidLocator androidLocator = field.getAnnotation(AndroidLocator.class);
             return locatorStrategy.getAndroidLocator(androidLocator);
         } else if (ENV.equals("IOS") && field.isAnnotationPresent(IOSLocator.class)) {
