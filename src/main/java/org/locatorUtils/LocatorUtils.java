@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import java.lang.reflect.Field;
 
 public class LocatorUtils {
-    private static final String ENV = System.getenv("ENVIRONMENT") != null ? System.getenv("ENVIRONMENT") : "ANDROID";
+    private static final String ENV = System.getenv("ENVIRONMENT");
 
     private static LocatorStrategy locatorStrategy;
 
